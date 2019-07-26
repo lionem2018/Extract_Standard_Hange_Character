@@ -1,6 +1,7 @@
 import io
 import os
 import argparse
+import csv
 
 
 SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -16,6 +17,10 @@ CHOSUNG_LIST = ['ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ',
 # 중성 리스트. 00 ~ 20
 JUNGSUNG_LIST = ['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ',
                  'ㅗ', 'ㅘ', 'ㅙ', 'ㅚ', 'ㅛ', 'ㅜ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅠ', 'ㅡ', 'ㅢ', 'ㅣ']
+
+JUNGSUNG_CASE = [['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅣ'],
+                 ['ㅗ', 'ㅛ', 'ㅜ', 'ㅠ', 'ㅡ'],
+                 ['ㅘ', 'ㅙ', 'ㅚ', 'ㅝ', 'ㅞ', 'ㅟ', 'ㅢ']]
 
 # 종성 리스트. 00 ~ 27 + 1(1개 없음)
 JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ',
@@ -74,13 +79,64 @@ def detach_character(character):
     return result
 
 
-def classfy(labels, output_dir):
+def count_case_number(case_list):
+
+    pre_char1 = ' '
+    count = 0
+
+    for character in case_list:
+        char_code = ord(character) - BASE_CODE
+        char1 = int(char_code / CHOSUNG_SET_NUMBER)
+
+        if pre_char1 != char1:
+            count += 1
+            pre_char1 = char1
+
+    return count
+
+
+def classify(labels, output_dir):
 
     labels_csv = io.open(os.path.join(output_dir, 'labels-map.csv'), 'w', encoding='utf-8')
 
+    case1 = list()
+    case2 = list()
+    case3 = list()
+    case4 = list()
+    case5 = list()
+    case6 = list()
+
     for character in labels:
         char_elements = detach_character(character)
-        print("".join(char_elements))
+        # print("".join(char_elements))
+        if char_elements[2] == JONGSUNG_LIST[0]:
+            if char_elements[1] in JUNGSUNG_CASE[0]:
+                case1.append(character)
+            elif char_elements[1] in JUNGSUNG_CASE[1]:
+                case2.append(character)
+            else:
+                case3.append(character)
+        else:
+            if char_elements[1] in JUNGSUNG_CASE[0]:
+                case4.append(character)
+            elif char_elements[1] in JUNGSUNG_CASE[1]:
+                case5.append(character)
+            else:
+                case6.append(character)
+
+    writer = csv.writer(labels_csv)
+    writer.writerow(case1)
+    print(count_case_number(case1))
+    writer.writerow(case2)
+    print(count_case_number(case2))
+    writer.writerow(case3)
+    print(count_case_number(case3))
+    writer.writerow(case4)
+    print(count_case_number(case4))
+    writer.writerow(case5)
+    print(count_case_number(case5))
+    writer.writerow(case6)
+    print(count_case_number(case6))
 
 
 if __name__ == '__main__':
@@ -92,5 +148,5 @@ if __name__ == '__main__':
                         default=DEFAULT_OUTPUT_DIR,
                         help='Output directory to store label CSV file.')
     args = parser.parse_args()
-    classfy(read_character_file(args.label_file), args.output_dir)
+    classify(read_character_file(args.label_file), args.output_dir)
 
