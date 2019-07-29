@@ -98,45 +98,48 @@ def count_case_number(case_list):
 def classify(labels, output_dir):
 
     labels_csv = io.open(os.path.join(output_dir, 'labels-map.csv'), 'w', encoding='utf-8')
+    lineForDraw = "========================================"
+    case = list()
 
-    case1 = list()
-    case2 = list()
-    case3 = list()
-    case4 = list()
-    case5 = list()
-    case6 = list()
+    for i in range(0, 6):
+        case.append([])
+
+    for i in range(0, 19):
+        for j in range(0, 6):
+            case[j].append([])
 
     for character in labels:
         char_elements = detach_character(character)
         # print("".join(char_elements))
         if char_elements[2] == JONGSUNG_LIST[0]:
             if char_elements[1] in JUNGSUNG_CASE[0]:
-                case1.append(character)
+                case[0][CHOSUNG_LIST.index(char_elements[0])].append(character)
             elif char_elements[1] in JUNGSUNG_CASE[1]:
-                case2.append(character)
+                case[1][CHOSUNG_LIST.index(char_elements[0])].append(character)
             else:
-                case3.append(character)
+                case[2][CHOSUNG_LIST.index(char_elements[0])].append(character)
         else:
             if char_elements[1] in JUNGSUNG_CASE[0]:
-                case4.append(character)
+                case[3][CHOSUNG_LIST.index(char_elements[0])].append(character)
             elif char_elements[1] in JUNGSUNG_CASE[1]:
-                case5.append(character)
+                case[4][CHOSUNG_LIST.index(char_elements[0])].append(character)
             else:
-                case6.append(character)
+                case[5][CHOSUNG_LIST.index(char_elements[0])].append(character)
 
     writer = csv.writer(labels_csv)
-    writer.writerow(case1)
-    print(count_case_number(case1))
-    writer.writerow(case2)
-    print(count_case_number(case2))
-    writer.writerow(case3)
-    print(count_case_number(case3))
-    writer.writerow(case4)
-    print(count_case_number(case4))
-    writer.writerow(case5)
-    print(count_case_number(case5))
-    writer.writerow(case6)
-    print(count_case_number(case6))
+
+    for i in range(0, 6):
+        for j in range(0, 19):
+            writer.writerow(case[i][j])
+
+        writer.writerow(lineForDraw)
+
+    # print("case1:", count_case_number(case[0]))
+    # print("case2:", count_case_number(case[1]))
+    # print("case3:", count_case_number(case[2]))
+    # print("case4:", count_case_number(case[3]))
+    # print("case5:", count_case_number(case[4]))
+    # print("case6:", count_case_number(case[5]))
 
 
 if __name__ == '__main__':
