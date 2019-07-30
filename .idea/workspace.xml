@@ -4,7 +4,7 @@
     <list default="true" id="2f92fc29-396d-46f3-ad65-3b9ca108d84a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SixCaseClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/SixCaseClassifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/labels-map.csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/labels-map.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/labels-map(ANSI).csv" beforeDir="false" afterPath="$PROJECT_DIR$/output/labels-map(ANSI).csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,10 +14,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/output/labels-map.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2862" />
+            <state relative-caret-position="1872">
+              <caret line="104" column="25" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -30,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SixCaseClassifier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="110" column="18" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
+            <state relative-caret-position="599">
+              <caret line="150" column="46" selection-start-line="150" selection-start-column="46" selection-end-line="150" selection-end-column="46" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -62,7 +64,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1912" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -181,6 +183,13 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/output/labels-map.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1872">
+          <caret line="104" column="25" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/2350-common-hangul.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -190,17 +199,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SixCaseClassifier.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="110" column="18" selection-start-line="110" selection-start-column="18" selection-end-line="110" selection-end-column="18" />
+        <state relative-caret-position="599">
+          <caret line="150" column="46" selection-start-line="150" selection-start-column="46" selection-end-line="150" selection-end-column="46" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output/labels-map.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2862" />
       </provider>
     </entry>
   </component>

@@ -147,6 +147,11 @@ def classify(labels, output_dir):
 
         jongsung_count[JONGSUNG_LIST.index(char_elements[2])] += 1
 
+        ###
+        if char_elements[2] == JONGSUNG_LIST[2]:
+            print(character)
+        ###
+
     writer = csv.writer(labels_csv)
 
     for i in range(0, 6):
