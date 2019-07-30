@@ -26,6 +26,7 @@ JUNGSUNG_CASE = [['ㅏ', 'ㅐ', 'ㅑ', 'ㅒ', 'ㅓ', 'ㅔ', 'ㅕ', 'ㅖ', 'ㅣ']
 JONGSUNG_LIST = [' ', 'ㄱ', 'ㄲ', 'ㄳ', 'ㄴ', 'ㄵ', 'ㄶ', 'ㄷ', 'ㄹ', 'ㄺ', 'ㄻ', 'ㄼ', 'ㄽ', 'ㄾ', 'ㄿ', 'ㅀ',
                  'ㅁ', 'ㅂ', 'ㅄ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ']
 
+
 BASE_CODE = 44032
 CHOSUNG_SET_NUMBER = 588
 JUNGSUNG_NUMBER = 28
@@ -98,7 +99,8 @@ def count_case_number(case_list):
 def classify(labels, output_dir):
 
     labels_csv = io.open(os.path.join(output_dir, 'labels-map.csv'), 'w', encoding='utf-8')
-    lineForDraw = "========================================"
+    line_for_draw = "========================================"
+    jongsung_count = list()
     case = list()
 
     for i in range(0, 6):
@@ -106,33 +108,55 @@ def classify(labels, output_dir):
 
     for i in range(0, 19):
         for j in range(0, 6):
-            case[j].append([])
+            if j < 3:
+                case[j].append([" ", " ", " ", " ", " ", " ", " ", " ", " "])
+            else:
+                case[j].append([])
+
+    for i in range(0, 28):
+        jongsung_count.append(0)
 
     for character in labels:
         char_elements = detach_character(character)
         # print("".join(char_elements))
         if char_elements[2] == JONGSUNG_LIST[0]:
             if char_elements[1] in JUNGSUNG_CASE[0]:
-                case[0][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                # case[0][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                case[0][CHOSUNG_LIST.index(char_elements[0])].insert(JUNGSUNG_CASE[0].index(char_elements[1]), character)
             elif char_elements[1] in JUNGSUNG_CASE[1]:
-                case[1][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                # case[1][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                case[1][CHOSUNG_LIST.index(char_elements[0])].insert(JUNGSUNG_CASE[1].index(char_elements[1]),
+                                                                     character)
             else:
-                case[2][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                # case[2][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                case[2][CHOSUNG_LIST.index(char_elements[0])].insert(JUNGSUNG_CASE[2].index(char_elements[1]),
+                                                                     character)
         else:
             if char_elements[1] in JUNGSUNG_CASE[0]:
                 case[3][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                # case[3][CHOSUNG_LIST.index(char_elements[0])].insert(JUNGSUNG_CASE[0].index(char_elements[1]),
+                                                                     # character)
             elif char_elements[1] in JUNGSUNG_CASE[1]:
                 case[4][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                # case[4][CHOSUNG_LIST.index(char_elements[0])].insert(JUNGSUNG_CASE[1].index(char_elements[1]),
+                                                                     # character)
             else:
                 case[5][CHOSUNG_LIST.index(char_elements[0])].append(character)
+                # case[5][CHOSUNG_LIST.index(char_elements[0])].insert(JUNGSUNG_CASE[2].index(char_elements[1]),
+                #                                                      character)
+
+        jongsung_count[JONGSUNG_LIST.index(char_elements[2])] += 1
 
     writer = csv.writer(labels_csv)
 
     for i in range(0, 6):
+        writer.writerow(JUNGSUNG_CASE[(i % 3)])
+
         for j in range(0, 19):
             writer.writerow(case[i][j])
 
-        writer.writerow(lineForDraw)
+        writer.writerow(line_for_draw)
+        # labels_csv.write(u'{},{}\n'.format(file_path, character))
 
     # print("case1:", count_case_number(case[0]))
     # print("case2:", count_case_number(case[1]))
@@ -140,6 +164,8 @@ def classify(labels, output_dir):
     # print("case4:", count_case_number(case[3]))
     # print("case5:", count_case_number(case[4]))
     # print("case6:", count_case_number(case[5]))
+
+    print(jongsung_count)
 
 
 if __name__ == '__main__':
