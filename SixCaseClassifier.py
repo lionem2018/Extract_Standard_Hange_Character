@@ -101,6 +101,8 @@ def classify(labels, output_dir):
     labels_csv = io.open(os.path.join(output_dir, 'labels-map.csv'), 'w', encoding='utf-8')
     line_for_draw = "========================================"
     jongsung_count = list()
+    jungsung_count = list()
+    pre_char1 = ' '
     case = list()
 
     for i in range(0, 6):
@@ -115,6 +117,9 @@ def classify(labels, output_dir):
 
     for i in range(0, 28):
         jongsung_count.append(0)
+
+    for i in range(0, 21):
+        jungsung_count.append(0)
 
     for character in labels:
         char_elements = detach_character(character)
@@ -147,9 +152,18 @@ def classify(labels, output_dir):
 
         jongsung_count[JONGSUNG_LIST.index(char_elements[2])] += 1
 
+        if char_elements[2] != JONGSUNG_LIST[0]:
+            if pre_char1 != char_elements[1]:
+                jungsung_count[JUNGSUNG_LIST.index(char_elements[1])] += 1
+                pre_char1 = char_elements[1]
+
         ###
-        if char_elements[2] == JONGSUNG_LIST[2]:
+        # if char_elements[2] == JONGSUNG_LIST[24]:
+        #     print(character)
+
+        if char_elements[1] == JUNGSUNG_LIST[3]:
             print(character)
+
         ###
 
     writer = csv.writer(labels_csv)
@@ -170,6 +184,9 @@ def classify(labels, output_dir):
     # print("case5:", count_case_number(case[4]))
     # print("case6:", count_case_number(case[5]))
 
+    print("Jungsung number:")
+    print(jungsung_count)
+    print("Jongsung number:")
     print(jongsung_count)
 
 
