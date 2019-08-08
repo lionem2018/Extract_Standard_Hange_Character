@@ -153,16 +153,16 @@ def classify(labels, output_dir):
         jongsung_count[JONGSUNG_LIST.index(char_elements[2])] += 1
 
         if char_elements[2] != JONGSUNG_LIST[0]:
-            if pre_char1 != char_elements[1]:
-                jungsung_count[JUNGSUNG_LIST.index(char_elements[1])] += 1
-                pre_char1 = char_elements[1]
+        #     if pre_char1 != char_elements[1]:
+            jungsung_count[JUNGSUNG_LIST.index(char_elements[1])] += 1
+                # pre_char1 = char_elements[1]
 
         ###
-        # if char_elements[2] == JONGSUNG_LIST[24]:
-        #     print(character)
-
-        if char_elements[1] == JUNGSUNG_LIST[3]:
+        if char_elements[2] == JONGSUNG_LIST[10]:
             print(character)
+        #
+        # if char_elements[1] == JUNGSUNG_LIST[17] and char_elements[2] != JONGSUNG_LIST[0]:
+        #     print(character)
 
         ###
 
