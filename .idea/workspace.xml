@@ -4,7 +4,6 @@
     <list default="true" id="2f92fc29-396d-46f3-ad65-3b9ca108d84a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SixCaseClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/SixCaseClassifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/labels-map(ANSI).xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output/labels-map(ANSI).xlsx" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,8 +30,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SixCaseClassifier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="617">
-              <caret line="188" column="28" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="28" />
+            <state relative-caret-position="401">
+              <caret line="166" column="63" lean-forward="true" selection-start-line="166" selection-start-column="63" selection-end-line="166" selection-end-column="63" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -61,9 +60,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1167" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1176" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -156,12 +156,12 @@
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15458423" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1609808" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.18714012" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" weight="0.18714012" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -178,6 +178,9 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/output/labels-map.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/2350-common-hangul.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -185,13 +188,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/output/labels-map.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/SixCaseClassifier.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="617">
-          <caret line="188" column="28" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="28" />
+        <state relative-caret-position="401">
+          <caret line="166" column="63" lean-forward="true" selection-start-line="166" selection-start-column="63" selection-end-line="166" selection-end-column="63" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
