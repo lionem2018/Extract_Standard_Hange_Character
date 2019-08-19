@@ -188,9 +188,12 @@ def classify(labels, output_dir):
     # print("case6:", count_case_number(case[5]))
 
     print("Jungsung number:")
-    print(jungsung_count)
+    for i in range(0, 21):
+        print(JUNGSUNG_LIST[i], jungsung_count[i])
+
     print("Jongsung number:")
-    print(jongsung_count)
+    for i in range(0, 28):
+        print(JONGSUNG_LIST[i], jongsung_count[i])
 
 
 if __name__ == '__main__':
