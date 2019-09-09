@@ -158,12 +158,16 @@ def classify(labels, output_dir):
                 # pre_char1 = char_elements[1]
 
         ###
+
         # if char_elements[2] == 'ㄴ':
         #     print(character)
-        #
-        if char_elements[1] == 'ㅙ' and char_elements[2] != JONGSUNG_LIST[0]:
-            print(character)
 
+        # if char_elements[1] == 'ㅏ' and char_elements[2] != JONGSUNG_LIST[0]:
+        #     print(character)
+
+        if char_elements[0] == 'ㅈ' and char_elements[1] in JUNGSUNG_CASE[2] and char_elements[2] != JONGSUNG_LIST[0]:
+            print(character)
+        #
         # if char_elements[1] == 'ㅞ' and char_elements[2] == 'ㅂ':
         #     print(character)
 
