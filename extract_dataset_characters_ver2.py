@@ -29,37 +29,41 @@ def extract_character_set(character_set_list):
         character_list = list()
         character_set_list.append(character_list)
 
+        jungsung_index = list(range(21))
+        jungsung_index += list(range(21))
+        for j in range(0, 15):
+            jungsung_index.append(random.randrange(0, 21))
+
+        jongsung_index = list(range(1, 28))
+        jongsung_index += list(range(1, 28))
+        jongsung_index.append(random.randrange(1, 28))
+        jongsung_index.append(random.randrange(1, 28))
+        jongsung_index.append(random.randrange(1, 28))
+
+        random.shuffle(jungsung_index)
+        random.shuffle(jongsung_index)
+
         for j in range(0, 57):
-            while True:
-                index = random.randrange(0, 21) * 28
-                character = chr(index + BASE_CODE + (j % 19) * CHOSUNG_SET_NUMBER)
+            index = jungsung_index[j] * 28
+            character = chr(index + BASE_CODE + (j % 19) * CHOSUNG_SET_NUMBER)
 
-                k = 0
-                while k < len(character_set_list):
-                    if character in character_set_list[k]:
-                        break
-                    k += 1
+            for k in range(0, len(character_set_list)):
+                if character in character_set_list[k]:
+                    print(character, ": 종성X 중복")
 
-                if k == len(character_set_list):
-                    character_list.append(character)
-                    break
+            character_list.append(character)
 
         for j in range(57, 114):
-            while True:
-                index1 = random.randrange(0, 21) * 28
-                index2 = random.randrange(1, 28)
-                index = (index1 + index2)
-                character = chr(index + BASE_CODE + (j % 19) * CHOSUNG_SET_NUMBER)
+            index1 = jungsung_index[j-57] * 28
+            index2 = jongsung_index[j-57]
+            index = index1 + index2
+            character = chr(index + BASE_CODE + (j % 19) * CHOSUNG_SET_NUMBER)
 
-                k = 0
-                while k < len(character_set_list):
-                    if character in character_set_list[k]:
-                        break
-                    k += 1
+            for k in range(0, len(character_set_list)):
+                if character in character_set_list[k]:
+                    print(character, ": 종성O 중복")
 
-                if k == len(character_set_list):
-                    character_list.append(character)
-                    break
+            character_list.append(character)
 
     return character_set_list
 
