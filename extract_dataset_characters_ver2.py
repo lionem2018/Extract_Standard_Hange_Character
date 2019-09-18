@@ -22,48 +22,77 @@ def load_basis_character(label_file):
     return character_set_list
 
 
-def extract_character_set(character_set_list):
+def check_and_replace_character(character_index, character, character_set_list, jungsung_index_list):
+    for k in range(0, len(character_set_list)):
+        if character in character_set_list[k]:
+            new_index = random.randrange(0, 21)
+            jungsung_list_index = jungsung_index_list.index(new_index)
+            print(character_index, jungsung_list_index)
+            jungsung_index_list[character_index], jungsung_index_list[jungsung_list_index] = jungsung_index_list[jungsung_list_index], \
+                                                                     jungsung_index_list[character_index]
 
-    for i in range(0, 4):
+            index = jungsung_index_list[character_index] * 28
+            character = chr(index + BASE_CODE + (character_index % 19) * CHOSUNG_SET_NUMBER)
+            print(character)
+            check_and_replace_character(character_index, character, character_set_list, jungsung_index_list)
+            return character
+
+
+def extract_character_set(character_set_list, set_num):
+
+    for i in range(len(character_set_list), set_num):
 
         character_list = list()
         character_set_list.append(character_list)
 
-        jungsung_index = list(range(21))
-        jungsung_index += list(range(21))
+        jungsung_index_list = list(range(21))
+        jungsung_index_list += list(range(21))
         for j in range(0, 15):
-            jungsung_index.append(random.randrange(0, 21))
+            jungsung_index_list.append(random.randrange(0, 21))
 
-        jongsung_index = list(range(1, 28))
-        jongsung_index += list(range(1, 28))
-        jongsung_index.append(random.randrange(1, 28))
-        jongsung_index.append(random.randrange(1, 28))
-        jongsung_index.append(random.randrange(1, 28))
+        jongsung_index_list = list(range(1, 28))
+        jongsung_index_list += list(range(1, 28))
+        jongsung_index_list.append(random.randrange(1, 28))
+        jongsung_index_list.append(random.randrange(1, 28))
+        jongsung_index_list.append(random.randrange(1, 28))
 
-        random.shuffle(jungsung_index)
-        random.shuffle(jongsung_index)
+        random.shuffle(jungsung_index_list)
+        random.shuffle(jongsung_index_list)
 
         for j in range(0, 57):
-            index = jungsung_index[j] * 28
+            index = jungsung_index_list[j] * 28
             character = chr(index + BASE_CODE + (j % 19) * CHOSUNG_SET_NUMBER)
 
-            for k in range(0, len(character_set_list)):
-                if character in character_set_list[k]:
-                    print(character, ": 종성X 중복")
+            character = check_and_replace_character(j, character, character_set_list, jungsung_index_list)
 
             character_list.append(character)
 
         for j in range(57, 114):
-            index1 = jungsung_index[j-57] * 28
-            index2 = jongsung_index[j-57]
+            index1 = jungsung_index_list[j-57] * 28
+            index2 = jongsung_index_list[j-57]
             index = index1 + index2
             character = chr(index + BASE_CODE + (j % 19) * CHOSUNG_SET_NUMBER)
 
             for k in range(0, len(character_set_list)):
                 if character in character_set_list[k]:
-                    print(character, ": 종성O 중복")
+                    new_index1 = random.randrange(0, 21)
+                    new_index2 = random.randrange(1, 28)
+                    jungsung_list_index = jungsung_index_list.index(new_index1)
+                    jongsung_list_index = jongsung_index_list.index(new_index2)
+
+                    jungsung_index_list[j-57], jungsung_index_list[jungsung_list_index] = jungsung_index_list[jungsung_list_index], jungsung_index_list[j-57]
+                    jongsung_index_list[j-57], jongsung_index_list[jongsung_list_index] = jongsung_index_list[jongsung_list_index], jongsung_index_list[j-57]
+
+                    index1 = jungsung_index_list[j - 57] * 28
+                    index2 = jongsung_index_list[j - 57]
+                    index = index1 + index2
+                    character = chr(index + BASE_CODE + (j % 19) * CHOSUNG_SET_NUMBER)
+                    print(character)
+                    break
 
             character_list.append(character)
+
+        print(character_list)
 
     return character_set_list
 
@@ -73,12 +102,23 @@ if __name__ == '__main__':
     parser.add_argument('--label-file', type=str, dest='label_file',
                         default=DEFAULT_LABEL_FILE,
                         help='File containing newline delimited labels.')
+    parser.add_argument('--set-num', type=int, dest='set_num',
+                        default=5,
+                        help='The number of character set(one set = 114 characters)')
+    parser.add_argument('--no-basis', type=int, dest='is_no_basis',
+                        default=0,
+                        help='If you don\'t have basis characters, It makes basis characters (defulat is 0)')
+
     args = parser.parse_args()
-    character_list = load_basis_character(args.label_file)
+
+    character_list = list()
+    if args.is_no_basis == 0:
+        character_list = load_basis_character(args.label_file)
+
     f = open('output.csv', 'w', encoding='utf-8', newline='')
     writer = csv.writer(f)
 
-    for unicode_list in extract_character_set(character_list):
+    for unicode_list in extract_character_set(character_list, args.set_num):
         writer.writerow(unicode_list)
 
     f.close()
