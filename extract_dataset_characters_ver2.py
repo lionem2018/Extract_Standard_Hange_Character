@@ -36,7 +36,6 @@ def check_and_replace_no_jongsung_character(character_index, character, characte
 
             index = jungsung_index_list[character_index] * 28
             character = chr(index + BASE_CODE + (character_index % 19) * CHOSUNG_SET_NUMBER)
-            print(character)
             character = check_and_replace_no_jongsung_character(character_index, character, character_set_list, jungsung_index_list)
             return character
     return character
@@ -64,7 +63,6 @@ def check_and_replace_character(character_index, character, character_set_list, 
 
             index = jungsung_index_list[character_index] * 28 + jongsung_index_list[character_index]
             character = chr(index + BASE_CODE + (character_index % 19) * CHOSUNG_SET_NUMBER)
-            print(character)
             character = check_and_replace_character(character_index, character, character_set_list, jungsung_index_list, jongsung_index_list)
             return character
 
@@ -110,8 +108,6 @@ def extract_character_set(character_set_list, set_num):
 
             character_list.append(character)
 
-        print(character_list)
-
     return character_set_list
 
 
@@ -122,7 +118,7 @@ if __name__ == '__main__':
                         help='File containing newline delimited labels.')
     parser.add_argument('--set-num', type=int, dest='set_num',
                         default=5,
-                        help='The number of character set(one set = 114 characters)')
+                        help='The number of character set(1 set = 114 characters)')
     parser.add_argument('--no-basis', type=int, dest='is_no_basis',
                         default=0,
                         help='If you don\'t have basis characters, It makes basis characters (defulat is 0)')
@@ -133,11 +129,20 @@ if __name__ == '__main__':
     if args.is_no_basis == 0:
         character_list = load_basis_character(args.label_file)
 
-    f = open('output.csv', 'w', encoding='utf-8', newline='')
-    writer = csv.writer(f)
+    f_csv = open('output.csv', 'w', encoding='utf-8', newline='')
+    f_txt = open('output.txt', 'w', encoding='utf-8')
+    writer = csv.writer(f_csv)
+    try:
+        for unicode_list in extract_character_set(character_list, args.set_num):
+            writer.writerow(unicode_list)
+            for i in range(0, len(unicode_list)):
+                f_txt.write(unicode_list[i] + '\n')
+            print(unicode_list)
+        print("데이터셋 생성 성공")
 
-    for unicode_list in extract_character_set(character_list, args.set_num):
-        writer.writerow(unicode_list)
+    except RecursionError as e:
+        print("재귀 오류, 재실행 필요")
 
-    f.close()
+    f_csv.close()
+    f_txt.close()
 
